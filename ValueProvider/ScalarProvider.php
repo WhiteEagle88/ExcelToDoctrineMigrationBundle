@@ -2,6 +2,7 @@
 
 namespace Sibers\ExcelToDoctrineMigrationBundle\ValueProvider;
 
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Sibers\ExcelToDoctrineMigrationBundle\Migration\Mapping;
 
 /**
@@ -19,7 +20,7 @@ class ScalarProvider extends AbstractValueProvider
     /**
      * {@inheritDoc}
      */
-    public function getValue(\PHPExcel_Worksheet $wSheet, $row, Mapping $mapping)
+    public function getValue(Worksheet $wSheet, $row, Mapping $mapping)
     {
         $excelColumns = $mapping->getExcelColumns();
         $column       = $excelColumns[0];

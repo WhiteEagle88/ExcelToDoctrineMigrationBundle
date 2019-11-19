@@ -1,6 +1,7 @@
 <?php
 namespace Sibers\ExcelToDoctrineMigrationBundle\ValueProvider;
 
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Sibers\ExcelToDoctrineMigrationBundle\Migration\Mapping;
 
 /**
@@ -20,7 +21,7 @@ class ConcatenateProvider extends AbstractValueProvider
     /**
      * {@inheritDoc}
      */
-    public function getValue(\PHPExcel_Worksheet $wSheet, $row, Mapping $mapping)
+    public function getValue(Worksheet $wSheet, $row, Mapping $mapping)
     {
         $excelColumns = $mapping->getExcelColumns();
         $type         = $mapping->getType();

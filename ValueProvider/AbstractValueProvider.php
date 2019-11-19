@@ -2,6 +2,7 @@
 
 namespace Sibers\ExcelToDoctrineMigrationBundle\ValueProvider;
 
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Sibers\ExcelToDoctrineMigrationBundle\Migration\Mapping;
 
 /**
@@ -47,14 +48,14 @@ abstract class AbstractValueProvider implements IValueProvider
     /**
      * Returns value
      * 
-     * @param \PHPExcel_Worksheet $wSheet active work sheet
+     * @param Worksheet $wSheet active work sheet
      * @param integer $row row
      * @param string $column column name
      * @param string $type type of column
      * 
      * @return mixed
      */
-    protected function getExcelValue(\PHPExcel_Worksheet $wSheet, $row, $column, $type)
+    protected function getExcelValue(Worksheet $wSheet, $row, $column, $type)
     {
         $cellCoordinate = $column . $row;
         $cell           = $wSheet->getCell($cellCoordinate);

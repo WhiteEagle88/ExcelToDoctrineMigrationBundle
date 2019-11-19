@@ -12,6 +12,9 @@
 namespace Sibers\ExcelToDoctrineMigrationBundle\Migration;
 
 use Doctrine\DBAL\Connection;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Sibers\ExcelToDoctrineMigrationBundle\Exception\NotUniqueExcelHeaderColumn;
 use Sibers\ExcelToDoctrineMigrationBundle\Exception\ExcelColumnNotFoundException;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -123,11 +126,11 @@ class Migrator {
      *
      * @param $filename string excel filename
      *
-     * @return \PHPExcel
+     * @return Spreadsheet
      */
     private function getReader($filename)
     {
-        $reader = \PHPExcel_IOFactory::createReaderForFile($filename);
+        $reader = IOFactory::createReaderForFile($filename);
         $reader->setReadDataOnly(true);
 
         return $reader->load($filename);
@@ -168,14 +171,14 @@ class Migrator {
      *
      * header => columnName
      *
-     * @param \PHPExcel_Worksheet $wSheet work sheet
+     * @param Worksheet $wSheet work sheet
      * @param Config $config configuration
      *
      * @return array
      *
      * @throws NotUniqueExcelHeaderColumn if header value is not unique
      */
-    private function getExcelMapping(\PHPExcel_Worksheet $wSheet, Config $config)
+    private function getExcelMapping(Worksheet $wSheet, Config $config)
     {
         $headerRow     = $config->getHeaderRow();
         $highestColumn = $wSheet->getHighestColumn();
@@ -200,7 +203,7 @@ class Migrator {
     /**
      * Returns values for row
      *
-     * @param $wSheet \PHPExcel_Worksheet work sheet
+     * @param $wSheet Worksheet work sheet
      * @param $row integer current row
      * @param $mappings array mapping collection
      *

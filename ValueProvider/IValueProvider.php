@@ -1,6 +1,7 @@
 <?php
 namespace Sibers\ExcelToDoctrineMigrationBundle\ValueProvider;
 
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Sibers\ExcelToDoctrineMigrationBundle\Migration\Mapping;
 
 /**
@@ -13,9 +14,9 @@ interface IValueProvider
     /**
      * Returns value
      * 
-     * @param \PHPExcel_Worksheet $wSheet active sheet
+     * @param Worksheet $wSheet active sheet
      * @param integer $row row
      * @param \Sibers\ExcelToDoctrineMigrationBundle\Migration\Mapping $mapping mapping
      */
-    public function getValue(\PHPExcel_Worksheet $wSheet, $row, Mapping $mapping);
+    public function getValue(Worksheet $wSheet, $row, Mapping $mapping);
 }
